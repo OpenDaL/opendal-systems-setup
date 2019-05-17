@@ -14,6 +14,11 @@ read -p "Provide a Django SECRET_KEY: "
 
 echo "$REPLY" > $CONFIG_DIR/DJANGO_SECRET_KEY
 
+# Specify ES IP/Port
+read -p "Provide the IP and port (IP:port) of the ES server: "
+
+echo "$REPLY" > $CONFIG_DIR/ES_LOC
+
 # Create virtualenv and install requirements
 python3.7 -m venv $VENV_DIR/opendal_frontend
 
