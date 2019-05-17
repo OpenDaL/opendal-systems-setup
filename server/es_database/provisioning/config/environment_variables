@@ -1,0 +1,6 @@
+CORE_DIR=/data
+CONFIG_DIR=/data/config
+VENV_DIR=/data/venvs
+TEMP_DIR=/data/tmp
+REPO_DIR=/data/code
+ENV_TYPE=production

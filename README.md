@@ -1,6 +1,6 @@
 # Systems Provisioning for The Open Data Library (OpenDaL)
 This repository contains the scripts and base configuration used for
-initial installation and set-up of the OpenDaL servers.
+initial installation and set-up parts of the OpenDaL system architecture.
 
 ## Architecture overview.
 The architecture contains the following servers:

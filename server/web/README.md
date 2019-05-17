@@ -13,6 +13,9 @@ the website (port 443)
 HTTPS port (443) on the server. The CloudFlare IP ranges can be found here:
 https://www.cloudflare.com/ips/
 
+Make sure to associate an Elastic IP with the server, since the IP should be
+contant, and easily interchangeable in case a new server is created.
+
 ## Installation Steps
 Running the scripts from the 'provisioning' directory in the order indicated by
 the numbers in the filenames, will take care of the initial system setup. After
