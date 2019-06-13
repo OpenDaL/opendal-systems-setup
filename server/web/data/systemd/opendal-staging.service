@@ -1,0 +1,14 @@
+[Unit]
+Description=uWSGI Django Frontend
+
+[Service]
+ExecStart=/data/venvs/staging/opendal_frontend/bin/uwsgi /data/config/staging/uwsgi_opendal.ini
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+Environment=ENV_TYPE=staging
+Environment=CONFIG_DIR=/data/config/staging
+
+[Install]
+WantedBy=multi-user.target

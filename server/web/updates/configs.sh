@@ -6,16 +6,31 @@ fi
 
 set -e  # Make sure errors will stop execution
 
+# Set the environment type:
+read -p "Please provide the environment type (staging/production): "
+
+if [ $REPLY == "production" ] || [ $REPLY == "staging" ]
+then
+    echo "Updating config files for the $REPLY environment"
+else
+    echo "Script STOPPED: Incorrect environment type!"
+    exit 1
+fi
+
 # Copy NGINX configs
-cp ../data/nginx/opendal_frontend.conf /etc/nginx/sites-available
-ln -sf /etc/nginx/sites-available/opendal_frontend.conf /etc/nginx/sites-enabled/
+cp ../data/nginx/opendal_$REPLY.conf /etc/nginx/sites-available
+ln -sf /etc/nginx/sites-available/opendal_$REPLY.conf /etc/nginx/sites-enabled/
 
 # Copy config dir
-cp ../data/config/* $CONFIG_DIR
+cp -r ../data/config/$REPLY/. $CONFIG_DIR/$REPLY
 
 # Copy www dir
-cp ../data/www/* $CORE_DIR/www/
+cp -r ../data/www/$REPLY/. $WWW_DIR/$REPLY
+
+# Copy systemd dir
+cp ../data/systemd/opendal-$REPLY.service /etc/systemd/system/
 
 # Restart NGINX
+systemctl daemon-reload
 systemctl restart nginx
-systemctl restart uwsgi
+systemctl restart opendal-$REPLY

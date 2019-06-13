@@ -15,15 +15,19 @@ set -a; source config/environment_variables; set +a;
 # Create core directory
 mkdir $CORE_DIR
 
-# Create www directory
-mkdir -p $CORE_DIR/www
+#Create child directories production
+mkdir -p $WWW_DIR/production
+mkdir -p $CONFIG_DIR/production
+mkdir -p $LOGS_DIR/production
+mkdir -p $VENV_DIR/production
+mkdir -p $CODE_DIR/production
 
-#Create child directories
-mkdir -p $CONFIG_DIR
-mkdir -p $LOGS_DIR
-mkdir -p $VENV_DIR
-mkdir -p $TEMP_DIR
-mkdir -p $REPO_DIR
+#Create child directories staging
+mkdir -p $WWW_DIR/staging
+mkdir -p $CONFIG_DIR/staging
+mkdir -p $LOGS_DIR/staging
+mkdir -p $VENV_DIR/staging
+mkdir -p $CODE_DIR/staging
 
 #Now reboot to set them
 echo "Rebooting..."

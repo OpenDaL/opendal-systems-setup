@@ -1,0 +1,14 @@
+[Unit]
+Description=uWSGI Django Frontend
+
+[Service]
+ExecStart=/data/venvs/production/opendal_frontend/bin/uwsgi /data/config/production/uwsgi_opendal.ini
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+Environment=ENV_TYPE=production
+Environment=CONFIG_DIR=/data/config/production
+
+[Install]
+WantedBy=multi-user.target

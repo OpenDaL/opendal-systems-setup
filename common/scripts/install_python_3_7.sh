@@ -5,4 +5,5 @@ set -e  # Make sure errors will stop execution
 add-apt-repository ppa:deadsnakes/ppa
 apt install -y python3.7
 apt install -y python3.7-dev
+apt install -y python3-venv #Required, otherwise venvs may not work with below package only
 apt install -y python3.7-venv
