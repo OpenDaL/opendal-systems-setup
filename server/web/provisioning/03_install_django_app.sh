@@ -31,6 +31,7 @@ python3.7 -m venv $VENV_DIR/staging/opendal_frontend
 source $VENV_DIR/production/opendal_frontend/bin/activate
 pip install wheel
 pip install uwsgi
+pip install uwsgitop
 pip install -r $CODE_DIR/production/datacatalog-frontend/django/datacatalog/requirements.txt
 export ENV_TYPE=production # Django uses this to determine the static dir
 # Store default config dir variable, to reset after this
@@ -43,6 +44,7 @@ deactivate
 source $VENV_DIR/staging/opendal_frontend/bin/activate
 pip install wheel
 pip install uwsgi
+pip install uwsgitop
 pip install -r $CODE_DIR/staging/datacatalog-frontend/django/datacatalog/requirements.txt
 export ENV_TYPE=staging # Django uses this to determine the static dir
 export CONFIG_DIR=$old_config_dir/production
