@@ -8,7 +8,7 @@ set -e  # Make sure errors will stop execution
 
 # Create Filesystem and mount EBS:
 lsblk
-read -p "Please provide data volume from above list: "
+read -p "Please provide data volume NAME from above list: "
 mkfs -t xfs /dev/$REPLY
 mkdir /data
 mount /dev/$REPLY /data
