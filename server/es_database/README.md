@@ -35,14 +35,14 @@ _Database Server 201935_)
 6. From Existing security groups, add FT Admin access (providing SSH and ES
 access from the office) and Web Server ES Access (Provides ES access to web
 server)
-7. Launch the instance (Select the ESDatabase.pem key)
+7. Launch the instance (Select the 'ES Database Server' key)
 
 ### 2 Copy setup scripts
 1. Connect to the new server over SSH, and run
 `mkdir -p ~/temp/opendal-systems-setup`.
 2. In a new terminal tab, navigate to the root of this repo, and run
 `./copy_to_server.sh`, and provide the IP of the server, and the location of
-ESDatabase.pem on your local machine
+ESDatabaseServer.pem on your local machine
 
 ### 3 Run setup scripts
 1. Return to the terminal tab with the SSH connection to the instance
