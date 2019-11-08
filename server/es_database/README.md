@@ -53,10 +53,12 @@ which can be confirmed.
 4. `sudo ./02_provision_directories_and_reboot.sh`
 5. Wait for reboot (probably 1 to 2 minutes) and reconnect to the server
 6. `cd ~/temp/opendal-systems-setup/server/es_database/provisioning`
-7. `sudo ./03_configure_es.sh`
+7. `sudo ./03_configure_es.sh`.
 
 ES should now start up. After half a minute, go to the browser to see if ES is
-running on the public IP (e.g. http://236.223.12.1:9200/)
+running on the public IP (e.g. http://236.223.12.1:9200/). You can use the
+admin account credentials, to test whether it works. These credentials can be
+found, along with the other credentials at `/home/ubuntu/es_creds.text`.
 
 ### 4 Fill the new database
 You can fill the database with processed harvested data you have locally. This

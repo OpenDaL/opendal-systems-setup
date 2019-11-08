@@ -50,12 +50,14 @@ ESDatabase.pem on your local machine
 7. `sudo ./03_install_django_app.sh`. This script asks for the _Django secret
 key_, which is in the System Administrators Key vault, The _ES ip and port_ (
 please make sure you provide the private IP of the ES server from the EC2
-console, e.g. '172.16.226.32:9200'). After this it will open the nano editor
-for _certificate.pem_ and _private.key_. For these files copy the contents of
-the certificate files from the Key vault, paste it in nano (ctrl+shift+v in
-terminal), do ctrl+x, type 'y' and press enter to save the file. These files
-are the certificate and private key used by the server to communicate with
-CloudFlare.
+console, e.g. '172.16.226.32:9200'). The _ES Password_ for the ES server
+'frontend' user can be found on that server at `/home/ubuntu/es_creds.txt`, if
+it's installed using the scripts in this repository. After this it will open
+the nano editor for _certificate.pem_ and _private.key_. For these files copy
+the contents of the certificate files from the Key vault, paste it in nano
+(ctrl+shift+v in terminal), do ctrl+x, type 'y' and press enter to save the
+file. These files are the certificate and private key used by the server to
+communicate with CloudFlare.
 8. `sudo ./04_setup_uwsgi_services.sh`
 
 ES should now start up. After half a minute, go to the browser to see if ES is
@@ -98,7 +100,9 @@ front-end to it. This is first tested on staging. SSH into the web server and:
 1. `cd ~/temp/opendal-systems-setup/server/web/updates`
 2. `sudo ./es_ip.sh`. This sets the new ES ip. As _environment_, input
 'staging', as _ES IP_ input the __private IP__ of the new Database Server from
-the EC2 Console, appended by ':9200' (the port number of the ES database)
+the EC2 Console, appended by ':9200' (the port number of the ES database). As
+_ES Password_ input the password for the 'frontend' user, which can be found in
+the file `/home/ubuntu/es_creds.txt` on the newly created ES Server.
 3. Login to CloudFlare, go the the 'page rules' page for the
 OpenDataLibrary.com domain, and disable the redirect rule for
 'test.opendatalibrary.com'.
