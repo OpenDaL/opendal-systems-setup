@@ -20,6 +20,7 @@ echo "$REPLY" > $CONFIG_DIR/production/DJANGO_SECRET_KEY
 read -p "Provide the IP and port (IP:port) of the ES server: "
 echo "$REPLY" > $CONFIG_DIR/production/ES_LOC
 read -s -p "Provide the Password for the 'frontend' ES user: "
+echo # By default it doesn't go to the next line
 echo "$REPLY" > $CONFIG_DIR/production/ES_PASS
 # Replicate config for staging
 cp -r $CONFIG_DIR/production/. $CONFIG_DIR/staging
