@@ -3,9 +3,9 @@ The Database server hosts the ES database that contains the resource metadata
 for the OpenDataLibrary.com platform. This database is rotated Weekly.
 
 ## Hardware
-Currently, the database is hosted on a single Amazon t3.medium instance, with
-2 cores and 4GB of RAM. This is combined with an 8GB root volume (GP SSD) for
-the software and OS, and a 96GB data volume (GP SSD) that contains the ES data
+Currently, the database is hosted on a single Amazon t3.small instance, with
+2 cores and 2GB of RAM. This is combined with an 8GB root volume (GP SSD) for
+the software and OS, and a 48GB data volume (GP SSD) that contains the ES data
 and logs.
 
 ## Server Installation and Rotation

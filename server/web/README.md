@@ -60,6 +60,10 @@ file. These files are the certificate and private key used by the server to
 communicate with CloudFlare.
 8. `sudo ./04_setup_uwsgi_services.sh`
 
+Before testing, please make sure you've added the internal AWS IP of the new
+machine (starting with 172.) to the 'Web Server ES Access' security group, so
+the new web-server can access the database.
+
 ES should now start up. After half a minute, go to the browser to see if ES is
 running on the public IP (e.g. http://236.223.12.1:9200/)
 
