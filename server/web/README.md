@@ -64,13 +64,10 @@ Before testing, please make sure you've added the internal AWS IP of the new
 machine (starting with 172.) to the 'Web Server ES Access' security group, so
 the new web-server can access the database.
 
-ES should now start up. After half a minute, go to the browser to see if ES is
-running on the public IP (e.g. http://236.223.12.1:9200/)
-
 ### 4 Test with the test.opendatalibrary.com subdomain
 1. Login to CloudFlare, go to the 'page rules' page for the opendatalibrary.com
 domain, and disable the page rule for the test.opendatalibrary.com domain.
-2. On the DNS page, point the test domain to the Public IP of the new server
+2. On the DNS page, point the _test_ domain to the Public IP of the new server
 3. Start the staging UWSGI process, by going to the server over SSH, and
 running `sudo systemctl start opendal-staging`
 4. Wait ~2 minutes for the DNS to be implemented on CloudFlare systems, and
