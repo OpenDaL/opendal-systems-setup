@@ -7,7 +7,7 @@ fi
 set -e  # Make sure errors will stop execution
 
 # Clone git repo production (provide credentials through terminal...)
-git clone https://gitlab.com/Tbro/datacatalog-frontend.git $CODE_DIR/production/datacatalog-frontend
+git clone https://github.com/OpenDaL/datacatalog-frontend.git $CODE_DIR/production/datacatalog-frontend
 # Replicate for staging
 cp -r $CODE_DIR/production/datacatalog-frontend/ $CODE_DIR/staging/datacatalog-frontend/ # ONLY works because target directory does not exist yet
 # For staging, checkout the develop branch

@@ -14,8 +14,7 @@ the OpenDataLibrary.com, updates are done every few weeks, by setting up a new
 web-server.
 
 To do this (1) Create a new EC2 instance, (2) Copy the setup scripts to this
-instance, (3) run the set-up scripts (4) Test with test. subdomain, (5) switch
-out public IP
+instance, (3) run the set-up scripts (4) switch out public IP
 
 ### 1 Create a new EC2 Instance:
 Create a new instance on Amazon using the following steps:
@@ -28,10 +27,10 @@ and Database server, for optimal latency, and deselect 'T2/T3 Unlimited' to
 control costs
 4. Use the default settings for the 8GB root volume
 5. Add a 'Name' tag that indicates the week number (e.g. _Web Server 201935_)
-6. From Existing security groups, add FT Admin access (providing SSH and ES
-access from the office) and CloudFlare HTTPS Access (Meaning CloudFlare can
-route traffic to our server)
-7. Launch the instance (Select the web_server.pem key)
+6. Add Security groups that allow you, as admin, to access the server. Also,
+   make sure that CloudFlare IP addresses are whitelisted if you wish to host
+   the server behind CloudFlare.
+7. Launch the instance
 
 ### 2 Copy setup scripts
 1. Connect to the new server over SSH, and run
@@ -64,19 +63,7 @@ Before testing, please make sure you've added the internal AWS IP of the new
 machine (starting with 172.) to the 'Web Server ES Access' security group, so
 the new web-server can access the database.
 
-### 4 Test with the test.opendatalibrary.com subdomain
-1. Login to CloudFlare, go to the 'page rules' page for the opendatalibrary.com
-domain, and disable the page rule for the test.opendatalibrary.com domain.
-2. On the DNS page, point the _test_ domain to the Public IP of the new server
-3. Start the staging UWSGI process, by going to the server over SSH, and
-running `sudo systemctl start opendal-staging`
-4. Wait ~2 minutes for the DNS to be implemented on CloudFlare systems, and
-then go to the test.opendatalibrary.com domain to test the front-end.
-5. Confirm that indeed the new server was used, by running
-`sudo tail -n 50 /var/log/nginx/access.log` on the server over SSH. This
-should show the logs of you browsing through the pages.
-
-### 5 Switch out public IP
+### 4 Switch out public IP
 To also switch over the production domain:
 
 1. Go to the EC2 console, select 'Elastic IPs' and re-associate the Elastic IP
@@ -104,34 +91,29 @@ front-end to it. This is first tested on staging. SSH into the web server and:
 the EC2 Console, appended by ':9200' (the port number of the ES database). As
 _ES Password_ input the password for the 'frontend' user, which can be found in
 the file `/home/ubuntu/es_creds.txt` on the newly created ES Server.
-3. Login to CloudFlare, go the the 'page rules' page for the
-OpenDataLibrary.com domain, and disable the redirect rule for
-'test.opendatalibrary.com'.
-4. Now test using 'test.opendatalibrary.com' (Please not that it may take a
-few minutes for the redirect rule to totally disable. If you're still
-redirected to the main domain, try incognito mode). To test if the new database
+1. Now test using 'test.opendatalibrary.com' to test if the new database
 is used, sort results by 'modified' date, to see what the most recent modified
 dates are.
-5. If successful, update the dropdown-lists of the datacatalog-frontend repo,
+4. If successful, update the dropdown-lists of the datacatalog-frontend repo,
 as described in the README of that repo. Commit the updated repo to the
 develop branch, and push it.
-6. Run `sudo ./django_app.sh` in the SSH window, As _environment_, input
+5. Run `sudo ./django_app.sh` in the SSH window, As _environment_, input
 'staging', and provide the git credentials.
-7. Put browser windows with test.opendatalibrary.com and opendatalibrary.com
+6. Put browser windows with test.opendatalibrary.com and opendatalibrary.com
 alongside, and compare the counts in the selection box for the type field.
 These should not be too different from each-other. Otherwise, this may indicate
 that data is missing in the new database.
-8. If all is good, run `sudo ./es_ip.sh`. This sets the new ES ip. As
+7. If all is good, run `sudo ./es_ip.sh`. This sets the new ES ip. As
 _environment_, input 'production', as _ES IP_ input the same as used in
 step (2)
-9. On your local pc, checkout the master branch of the datacatalog-frontend
+8. On your local pc, checkout the master branch of the datacatalog-frontend
 repo, and merge with develop. Push the repo. Again checkout develop afterwards
 to reset for next time.
-10. Run `sudo ./django_app.sh` in the SSH window, As _environment_, input
+9. Run `sudo ./django_app.sh` in the SSH window, As _environment_, input
 'production', and provide the git credentials.
-11. Now test if the opendatalibrary.com main domain is completely functional. Sort
+10. Now test if the opendatalibrary.com main domain is completely functional. Sort
 results by modified date, to make sure it's using the most recent database
 server.
-12. If all is good, disable the staging process
+11. If all is good, disable the staging process
 `sudo systemctl stop opendal-staging`, and enable the page-rule from step (3)
 again
